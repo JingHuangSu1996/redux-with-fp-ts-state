@@ -1,4 +1,4 @@
-type Hint = { color: string; shape: string };
+export type Hint = { color: string; shape: string };
 export type Selected = { selected: boolean };
 
 export type Card = {
@@ -9,7 +9,7 @@ export type Card = {
 
 export type Data = {
   cards: Array<Card>;
-  hint: Hint;
+  hint?: Hint;
   left?: number;
   moves?: number;
 };
