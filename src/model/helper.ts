@@ -28,8 +28,8 @@ export const mapProps = <A>(target: Array<string>, fn: (a: A) => A) =>
   _over(lensPath(target), fn);
 
 // over :: (String, (a -> b)) -> Object -> State(Object, _)
-export const over = <A, T>(key: string, fn: (a: A) => A) =>
-  S.modify<T>(mapProps([key], fn));
+export const over = <A>(key: string, fn: (a: A) => A) =>
+  S.modify(mapProps([key], fn));
 
 // assignBy :: ((a -> Boolean), Object) -> Object -> Object
 export const assignBy = <A extends object, U extends object>(

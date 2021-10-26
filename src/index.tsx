@@ -1,14 +1,14 @@
 import { pipe } from 'fp-ts/lib/function';
-import { selectCard } from './model/answer';
+import answer from './model/answer';
 import * as S from 'fp-ts/lib/State';
-import { D } from './type';
+import { Data } from './type';
 
 // const state: D = {
 //   left: 8,
 //   moves: 0,
 // };
 
-const state: D = {
+const state: Data = {
   cards: [
     { id: 'green-square', color: 'green', shape: 'square' },
     { id: 'orange-square', color: 'orange', shape: 'square' },
@@ -18,11 +18,18 @@ const state: D = {
     color: 'green',
     shape: 'square',
   },
+  moves: 0,
+  left: 8,
 };
 
 let result;
 
-// @ts-ignore
-result = pipe(S.chain(selectCard('blue-triangle')), S.execute(state));
+result = pipe(
+  answer<Data>('green-square'),
+  S.chain(() => answer<Data>('orange-square')),
+  S.chain(() => answer<Data>('blue-square')),
+  S.execute(state),
+);
 
+// @ts-ignore
 console.log(result);

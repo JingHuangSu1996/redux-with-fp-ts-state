@@ -7,7 +7,7 @@ export type Card = {
   shape: string;
 };
 
-export type D = {
+export type Data = {
   cards: Array<Card>;
   hint: Hint;
   left?: number;
