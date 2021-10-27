@@ -12,4 +12,5 @@ export type Data = {
   hint?: Hint;
   left?: number;
   moves?: number;
+  isCorrect: unknown;
 };

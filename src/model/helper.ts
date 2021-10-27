@@ -5,7 +5,8 @@ import lensPath from 'ramda/src/lensPath';
 import _over from 'ramda/src/over';
 import when from 'ramda/src/when';
 import merge from 'ramda/src/merge';
-import { pipe } from 'fp-ts/lib/function';
+import _find from 'ramda/src/find';
+import { pipe, flow } from 'fp-ts/lib/function';
 
 // inc :: Number -> Number
 export const inc = (x: number): number => x + 1;
@@ -39,6 +40,14 @@ export const assignBy = <A extends object, U extends object>(
   obj: U,
 ) => when(pred, merge(obj));
 
+// find :: (a -> Boolean) -> Object -> Option a
+export const find =
+  <A>(pred: (a: A) => boolean) =>
+  (o: any) => {
+    const result = _find(pred, o);
+    return result ? O.some(result) : O.none;
+  };
+
 // getState :: String -> State Object (Option a)
 export const getState = <T>(
   key: keyof T,
@@ -47,3 +56,12 @@ export const getState = <T>(
     S.get<T>(),
     S.map((o: T) => O.fromNullable(o[key])),
   );
+
+// liftA2(g): (fb: F<B>) => (fc: F<C>) => F<D>
+export const liftA2State =
+  <B, C, D, T>(g: (b: B) => (c: C) => D) =>
+  (fb: S.State<T, B>, fc: S.State<T, C>): S.State<T, D> =>
+    pipe(fb, S.map(g), S.ap(fc));
+
+// liftState :: (a -> b) -> a -> State s b
+export const liftState = <A, B>(fn: (a: A) => B) => pipe(fn, S.of);
