@@ -2,7 +2,7 @@ import { pipe } from 'fp-ts/lib/function';
 import answer from './model/answer';
 import * as S from 'fp-ts/lib/State';
 import { Data } from './type';
-import feedback, { validateAnswer } from './model/feedback';
+import feedback from './model/feedback';
 
 // const state: D = {
 //   left: 8,
@@ -22,6 +22,7 @@ const state: Data = {
   moves: 0,
   left: 8,
   isCorrect: null,
+  rank: 3,
 };
 
 let result;
@@ -35,7 +36,7 @@ let result;
 
 // result = pipe(setIsCorrect(true), S.execute(state));
 
-result = pipe(feedback<Data>('blue-square'), S.execute(state));
+result = pipe(feedback<Data>('green-square'), S.execute(state));
 
 // @ts-ignore
 console.log(result);

@@ -13,4 +13,5 @@ export type Data = {
   left?: number;
   moves?: number;
   isCorrect: unknown;
+  rank?: number;
 };

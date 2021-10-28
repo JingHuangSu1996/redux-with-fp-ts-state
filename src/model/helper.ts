@@ -14,6 +14,10 @@ export const inc = (x: number): number => x + 1;
 // dec :: Number -> Number
 export const dec = (x: number): number => x - 1;
 
+// decOrInc :: Boolean -> Number ->  Number
+export const decOrInc = (x: boolean): ((a: number) => number) =>
+  x ? inc : dec;
+
 // clamp :: (Number, Number) -> Number -> Number
 export const clamp =
   (min: number, max: number) =>
