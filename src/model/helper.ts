@@ -69,3 +69,6 @@ export const liftA2State =
 
 // liftState :: (a -> b) -> a -> State s b
 export const liftState = <A, B>(fn: (a: A) => B) => pipe(fn, S.of);
+
+export const liftState_ = <A, B>(fn: (a: A) => B) =>
+  flow(fn, <any>S.of);

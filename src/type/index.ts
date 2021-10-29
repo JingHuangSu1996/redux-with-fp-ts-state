@@ -8,10 +8,11 @@ export type Card = {
 };
 
 export type Data = {
-  cards: Array<Card>;
+  cards?: Array<Card>;
   hint?: Hint;
   left?: number;
   moves?: number;
-  isCorrect: unknown;
+  isCorrect?: unknown;
   rank?: number;
+  seed: number;
 };
